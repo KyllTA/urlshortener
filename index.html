@@ -1,9 +1,30 @@
+<script>
+  function makeid(length) {
+     length = length || 5;
+     var result           = '/';
+     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+     var charactersLength = characters.length;
+     for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+     }
+     return result;
+   }
+  
+  function submit(newURL) {
+    
+  }
+</script>
+
 <html>
   <head>
     <title>URL Shortener</title>
   </head>
   <body>
-    HI
+    <h1>URL Shortener</h1>
+    <h3>Enter a URL below and hit submit,<br>and I will generate a short URL you can use!</h3>
+    <input id="urlInput" placeholder="Enter Url Here">
+    <br><button id="urlSubmit" oninput="submit(document.getElementById('urlInput').value)">
+    <br><span id="output"></span>
   </body>
 </html>
 
