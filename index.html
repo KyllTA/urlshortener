@@ -1,7 +1,7 @@
 <html>
   <head>
     <script>
-      const request = require('@request');
+      import {request} from '@request';
     </script>
     <title>URL Shortener</title>
     <script>
@@ -29,7 +29,7 @@
     <h1>URL Shortener</h1>
     <h3>Enter a URL below and hit submit,<br>and I will generate a short URL you can use!</h3>
     <input id="urlInput" placeholder="Enter Url Here">
-    <br><button id="urlSubmit" oninput="submit(document.getElementById('urlInput').value)">
+    <br><button id="urlSubmit" oninput="submit(document.getElementById('urlInput').value)">Submit</button>
     <br><span id="output"></span>
   </body>
 </html>
