@@ -1,23 +1,29 @@
-<script>
-  function makeid(length) {
-     length = length || 5;
-     var result           = '/';
-     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-     var charactersLength = characters.length;
-     for ( var i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-     }
-     return result;
-   }
-  
-  function submit(newURL) {
-    
-  }
-</script>
-
 <html>
   <head>
+    <script>
+      const request = require('@request');
+    </script>
     <title>URL Shortener</title>
+    <script>
+      function makeid(length) {
+         length = length || 5;
+         var result           = '/';
+         var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+         var charactersLength = characters.length;
+         for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+         }
+         return result;
+       }
+
+       function submit(newURL) {
+         request('http://api.github.com/repos/KyllingeneThrowAway/urlshortener/git/branches/main/index.html', { json: true }, (err, res, body) => {
+          if (err) { return console.log(err); }
+            console.log(body.url);
+            console.log(body.explanation);
+         });
+       }
+    </script>
   </head>
   <body>
     <h1>URL Shortener</h1>
