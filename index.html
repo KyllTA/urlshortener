@@ -1,10 +1,10 @@
 <html>
   <head>
-    <script type="module">
-      import {request} from 'https://github.com/request/request/archive/master.zip';
-    </script>
     <title>URL Shortener</title>
+    <script src="https://unpkg.com/github-api/dist/GitHub.bundle.min.js"></script>
     <script>
+      const idLength = 5;
+      
       function makeid(length) {
          length = length || 5;
          var result           = '/';
@@ -17,11 +17,28 @@
        }
 
        function submit(newURL) {
-         request('http://api.github.com/repos/KyllingeneThrowAway/urlshortener/git/branches/main/index.html', { json: true }, (err, res, body) => {
-          if (err) { return console.log(err); }
-            console.log(body.url);
-            console.log(body.explanation);
-         });
+         var urls = fetch("raw.github.com/kyllta/urlshortener/main/index.html").then(response => response.json());
+         urls.newURL = makeid(idLength);
+         
+         // Creates a new instance of the Github object exposed by Github.js
+          var github = new Github({
+            username: 'kyllta',
+            password: 'ThrowAwayPassword',
+            auth: 'basic'
+          });
+
+          // Creates an object representing the repository you want to work with
+          var repository = github.getRepo('kyllta', 'urlshortener');
+
+          // Creates a new file (or updates it if the file already exists)
+          // with the content provided
+          repository.write(
+             'main', // e.g. 'master'
+             'savedurls.json', // e.g. 'blog/index.md'
+             JSON.stringify(urls), // e.g. 'Hello world, this is my new content'
+             'Added New URL', // e.g. 'Created new index'
+             function(err) {error(err)}
+          );
        }
     </script>
   </head>
