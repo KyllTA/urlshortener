@@ -1,2 +1,2 @@
 # urlshortener
-A URL shortener.
+A database for a URL shortener.
